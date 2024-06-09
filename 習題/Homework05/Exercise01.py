@@ -1,18 +1,36 @@
-from engine import Value
+import matplotlib.pyplot as plt
+import numpy as np
+import gd
 
-a = Value(2)
-b = Value(1)
-c = Value(3)
+# 資料
+x = np.array([0, 1, 2, 3, 4], dtype=np.float32)
+y = np.array([1.9, 3.1, 3.9, 5.0, 6.2], dtype=np.float32)
 
-while True:
-    f = a**2 + b**2 + c**2
+# 線性預測函數
+def predict(a, xt):
+    return a[0].Value() + a[1].Value() * xt
 
-    print("a=", a.data, "b=", b.data, "c=", c.data, "f=", f.data)
-    f.backward()
+# 均方誤差損失函數
+def MSE(a, x, y):
+    total = 0
+    for i in range(len(x)):
+        total += (y[i] - predict(a, x[i])) ** 2
+    return total
 
-    if a.grad < 0.001:
-        break
+# 優化時的損失函數
+def loss(p):
+    return MSE(p, x, y)
 
-    a -= a.grad * 0.01
-    b -= b.grad * 0.01
-    c -= c.grad * 0.01
+# 參數的初始猜測值
+p = [gd.Value(0.0), gd.Value(0.0)]
+
+# 執行梯度下降
+plearn = gd.gradientDescendent(loss, p, max_loops=3000, dump_period=1)
+
+# 繪製圖形
+y_predicted = [predict(plearn, xt) for xt in x]
+print('y_predicted=', y_predicted)
+plt.plot(x, y, 'ro', label='原始數據')
+plt.plot(x, y_predicted, label='擬合線')
+plt.legend()
+plt.show()
