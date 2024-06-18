@@ -1,0 +1,60 @@
+:root {
+    --col-size: 50px;
+    --circle-size: 35px;
+}
+body {
+    text-align: center;
+    background-color: #ffc859;
+    font-family: monospace;
+    padding: 30px;
+}
+.grid {
+    display: inline-block;
+    border: 1px solid black;
+}
+.row {
+    display: flex;
+}
+.col {
+    position: relative;
+    width: var(--col-size);
+    height: var(--col-size);
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+.col::after,
+.col::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.col.hint::before,
+.col.black::after,
+.col.white::after {
+    width: var(--circle-size);
+    height: var(--circle-size);
+    border: 1px solid black;
+}
+.col.hint::before {
+    cursor: pointer;
+    border-style: dashed;
+}
+.col.black::after {
+    background-color: black;
+}
+.col.white::after {
+    background-color: white;
+}
+.col.black::after,
+.col.white::after {
+    transition: background-color 1s step-end;
+}
+.col.active::after {
+    transition: width .2s linear, height .2s linear !important;
+}

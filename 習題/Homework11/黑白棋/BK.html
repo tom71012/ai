@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="game">
+        <div class="grid">
+            <div v-for="(_, y) in 8" class="row">
+                <div v-for="(_, x) in 8" class="col" :class="getClassOf(x, y)" @click="place(x, y)">
+                </div>
+            </div>
+        </div>
+        <p>{{ scores.black }} : {{ scores.white }}<br>{{ status }}</p>
+        <input type="checkbox" v-model="enableAI"/> enable AI
+        <select v-model="level">
+            <option v-for="i in 6" :value="i" :key="i">level {{ i }}</option>
+        </select>
+        <button @click="runAI">run AI</button>
+        <button @click="undo">undo</button>
+        <button @click="restart">restart</button>
+    </div>
+</body>
+
+</html>
