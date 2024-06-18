@@ -1,3 +1,6 @@
+
+[參考wiki](https://zh.wikipedia.org/zh-tw/%E6%9E%81%E5%B0%8F%E5%8C%96%E6%9E%81%E5%A4%A7%E7%AE%97%E6%B3%95)
+
 ## 說明
 這段程式碼是一個簡單的國際象棋人工智慧（AI）程式，使用了minimax演算法和Alpha-Beta剪枝來找出最佳的棋步。
 
